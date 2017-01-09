@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackDownloader", "TrackDownloader\TrackDownloader.csproj", "{2F4A76F7-CEEE-4DBE-8CBE-B51117C98F87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garmin.Device.Core", "Garmin.Device.Core\Garmin.Device.Core.csproj", "{1EB16237-97A2-4F6F-97EB-48B3B4B17530}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "log-to-gpx", "log-to-gpx\log-to-gpx.csproj", "{151D6387-955A-4377-914D-EA1E207CF0EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F4A76F7-CEEE-4DBE-8CBE-B51117C98F87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F4A76F7-CEEE-4DBE-8CBE-B51117C98F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F4A76F7-CEEE-4DBE-8CBE-B51117C98F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F4A76F7-CEEE-4DBE-8CBE-B51117C98F87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EB16237-97A2-4F6F-97EB-48B3B4B17530}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EB16237-97A2-4F6F-97EB-48B3B4B17530}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EB16237-97A2-4F6F-97EB-48B3B4B17530}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EB16237-97A2-4F6F-97EB-48B3B4B17530}.Release|Any CPU.Build.0 = Release|Any CPU
+		{151D6387-955A-4377-914D-EA1E207CF0EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{151D6387-955A-4377-914D-EA1E207CF0EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{151D6387-955A-4377-914D-EA1E207CF0EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{151D6387-955A-4377-914D-EA1E207CF0EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

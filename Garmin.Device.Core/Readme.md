@@ -1,0 +1,1 @@
+﻿Much of the USB access code is dervied from https://sourceforge.net/projects/opensportsman/
