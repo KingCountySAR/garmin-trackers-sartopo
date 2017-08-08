@@ -7,8 +7,8 @@
     <ProjectGuid>{2F4A76F7-CEEE-4DBE-8CBE-B51117C98F87}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TrackDownloader</RootNamespace>
-    <AssemblyName>TrackDownloader</AssemblyName>
+    <RootNamespace>TrackerConsole</RootNamespace>
+    <AssemblyName>TrackerConsole</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -52,6 +52,7 @@
     <Compile Include="GarminReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WordWrap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

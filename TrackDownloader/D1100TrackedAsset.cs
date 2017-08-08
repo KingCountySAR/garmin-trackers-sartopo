@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrackDownloader
+namespace TrackerConsole
 {
   public class PositionType
   {

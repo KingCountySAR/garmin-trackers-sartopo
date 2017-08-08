@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Garmin.Device.Core;
 
-namespace TrackDownloader
+namespace TrackerConsole
 {
   public class GarminReader
   {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
-using TrackDownloader;
+using TrackerConsole;
 
 namespace log_to_gpx
 {
@@ -32,7 +32,7 @@ namespace log_to_gpx
 
       Dictionary<string, Team> tracks = new Dictionary<string, Team>();
 
-      foreach (var line in File.ReadLines(args[1]))
+      foreach (var line in File.ReadLines(args[0]))
       {
         var packet = JsonConvert.DeserializeObject<D1100TrackedAsset>(line);
         Team team;
