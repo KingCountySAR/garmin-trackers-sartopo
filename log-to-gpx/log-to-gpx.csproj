@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -54,7 +54,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TrackDownloader\TrackDownloader.csproj">
+    <ProjectReference Include="..\TrackerConsole\TrackerConsole.csproj">
       <Project>{2f4a76f7-ceee-4dbe-8cbe-b51117c98f87}</Project>
       <Name>TrackDownloader</Name>
     </ProjectReference>

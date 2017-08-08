@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackDownloader", "TrackDownloader\TrackDownloader.csproj", "{2F4A76F7-CEEE-4DBE-8CBE-B51117C98F87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackerConsole", "TrackerConsole\TrackerConsole.csproj", "{2F4A76F7-CEEE-4DBE-8CBE-B51117C98F87}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garmin.Device.Core", "Garmin.Device.Core\Garmin.Device.Core.csproj", "{1EB16237-97A2-4F6F-97EB-48B3B4B17530}"
 EndProject
