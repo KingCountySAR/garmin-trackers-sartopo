@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Garmin.Device.Core;
@@ -24,6 +26,9 @@ namespace TrackerConsole
 
     static void Main(string[] args)
     {
+      ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
+
+
       var tracker = new Program(args.Length > (int)Args.Server ? args[(int)Args.Server].TrimEnd('/') : "http://localhost:8080");
       callsign = args.Length > (int)Args.Callsign ? args[(int)Args.Callsign] : "COLLAR";
 
@@ -124,7 +129,8 @@ namespace TrackerConsole
     {
       if (_writer == null)
       {
-        _writer = new StreamWriter(File.Open($"track-{DateTime.Now.ToString("yyyy-MM-dd-HHmm")}.log", FileMode.Create, FileAccess.Write, FileShare.ReadWrite));
+        var filename = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $"track-{DateTime.Now.ToString("yyyy-MM-dd-HHmm")}.log");
+        _writer = new StreamWriter(File.Open(filename, FileMode.Create, FileAccess.Write, FileShare.ReadWrite));
         _writer.AutoFlush = true;
       }
 
