@@ -93,8 +93,15 @@ namespace TrackerConsole
 
           while (true)
           {
-            var packet = reader.WaitForPacket(3078);
-            Update(new D1100TrackedAsset(packet.data));
+            try
+            {
+              var packet = reader.WaitForPacket(3078);
+              Update(new D1100TrackedAsset(packet.data));
+            }
+            catch (Exception e)
+            {
+              LogException(e.Message);
+            }
           }
         }
 
@@ -154,9 +161,10 @@ namespace TrackerConsole
           string identifier = entry.Identifier;
           if (!string.IsNullOrWhiteSpace(callsign)) identifier = callsign + "-" + identifier;
 
-          await _web.GetAsync($"{_server}/rest/location/update/position?lat={entry.Position.Latitude}&lng={entry.Position.Longitude}&id=APRS:{identifier}");
+          await _web.GetAsync($"{_server}/rest/location/update/position?lat={entry.Position.Latitude}&lng={entry.Position.Longitude}&id=FLEET:{identifier}");
         }
         catch (HttpRequestException ex)
+
         {
           LogException(ex.InnerException.Message);
         }

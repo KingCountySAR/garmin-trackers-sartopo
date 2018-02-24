@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -104,7 +106,17 @@ namespace Garmin.Device.Core
 
       usbPacket.data = new byte[usbPacket.dataSize];
 
-      Array.Copy(byteArray, offset, usbPacket.data, 0, usbPacket.dataSize);
+      try
+      {
+        Array.Copy(byteArray, offset, usbPacket.data, 0, usbPacket.dataSize);
+      }
+      catch (ArgumentException)
+      {
+        File.AppendAllText(Path.Combine(Assembly.GetExecutingAssembly().Location, "bad-packets.txt"), BitConverter.ToString(byteArray));
+        Console.Error.WriteLine("Skipped bad packet");
+        usbPacket.packetId = -1;
+      }
+
 
       return usbPacket;
     }
