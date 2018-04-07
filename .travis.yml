@@ -1,2 +1,3 @@
 language: csharp
-solution: garmin-trackers.sln
+script:
+  - xbuild /p:Configuration=Debug garmin-trackers.sln
