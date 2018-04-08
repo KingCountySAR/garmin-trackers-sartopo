@@ -1,3 +1,4 @@
 language: csharp
 script:
+  - nuget restore garmin-trackers.sln
   - msbuild /p:Configuration=Debug garmin-trackers.sln
