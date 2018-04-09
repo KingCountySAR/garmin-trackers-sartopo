@@ -2,3 +2,13 @@ language: csharp
 script:
   - nuget restore garmin-trackers.sln
   - msbuild /p:Configuration=Debug garmin-trackers.sln
+  - cd bin
+  - zip TrackerConsole.zip
+deploy:
+  provider: releases
+  api_key:
+    secure: qsQG6njQ9HDtIhcwenzmPC2aEyXWEUkBVuRwnc5dfy69hwdr3prbmrXpBBH+zeaR4ERHXSpa3Qe3cROaYcHeRkzZYODty/fQUSOKB6OlhvGigUDYmBio4fbZbgaLVeEwxCiuGqbXKOAqkAYw5ntyl4eP4DUBxEx99G6XXrvK0ww9SUUbvZX0paXV44DoOE5q8r+JmVnwhfyODoALhNXydRaDn6TfrKIllCFqUq/VmIc2DIRV/Ee+q32Pw9Hq3F1j/FY0pz9WtIHmxIMSx8SyCljGOUg0BXOAik6tk+e/xiNflJ1Esofd+zSbpU3yZEGZtjlx4Jj0y4NFc0f1Q5lQMpd1eBtkucoGMXvkqlPOu/9eahU5ViU49W1C1nvWePPBPTxcOpm6bUhqUT3VYL0vOHGTr12ypQoXcyFFcl/P19n1CKKH9jEa1sRuaGYZCo+YpoGk6Hy3gV6fIU/QMu+vU+KlQGzlF9aly88OWyV5TtTz6PZY9RE29jsLP+n55VT480eWPPvrMFdDJaVkDGYpd/ZpTpQRtlEiEqJjrwrFTFm+uZITVrHB/4/Qjv944flpE9BJ1QzytiRYgyJ4mstf8B8nKcS+g7XGp78+XJb59N+s0l2gWGDJ9nsM7CR0HK7gqAL93tcSv9ghpLXQuwAXZhF4/Gz0nTfxrZNvTkQxGds=
+  file: bin/TrackerConsole.zip
+  skip_cleanup: true
+  on:
+    tags: true
