@@ -62,6 +62,9 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="TrackerConsole - sartopo.com.cmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Garmin.Device.Core\Garmin.Device.Core.csproj">
