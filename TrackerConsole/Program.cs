@@ -64,7 +64,7 @@ namespace TrackerConsole
     public void Start()
     {
       string input = string.Empty;
-
+      Print();
       while (input.Length == 0)
       {
         GarminDevice baseStation = null;
@@ -193,10 +193,11 @@ namespace TrackerConsole
       int width = Console.WindowWidth - 1;
       lock (syncLock)
       {
+        Console.Clear();
         Console.SetCursorPosition(0, 0);
         Console.ForegroundColor = ConsoleColor.Gray;
         Console.WriteLine("Garmin Alpha Track Download v" + typeof(Program).Assembly.GetName().Version);
-        Console.WriteLine("Logging to " + _server);
+        Console.WriteLine($"Logging to {_server} with call sign {callsign}");
         Console.WriteLine();
         foreach (var p in latest.Keys.OrderBy(f => f).Select(f => latest[f]))
         {

@@ -56,6 +56,10 @@
     <Compile Include="WordWrap.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\RELEASE_NOTES.md">
+      <Link>RELEASE_NOTES.md</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
