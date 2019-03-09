@@ -188,36 +188,41 @@ namespace TrackerConsole
       Print();
     }
 
+    private void WriteLine(string text)
+    {
+      string padding = new string(' ', Console.WindowWidth - Console.CursorLeft - text.Length - 1);
+      Console.WriteLine(text + padding);
+    }
+
     private void Print()
     {
       int width = Console.WindowWidth - 1;
       lock (syncLock)
       {
-        Console.Clear();
         Console.SetCursorPosition(0, 0);
         Console.ForegroundColor = ConsoleColor.Gray;
-        Console.WriteLine("Garmin Alpha Track Download v" + typeof(Program).Assembly.GetName().Version);
-        Console.WriteLine($"Logging to {_server} with call sign {callsign}");
-        Console.WriteLine();
+        WriteLine("Garmin Alpha Track Download v" + typeof(Program).Assembly.GetName().Version);
+        WriteLine($"Logging to {_server} with call sign {callsign}");
+        WriteLine(string.Empty);
         foreach (var p in latest.Keys.OrderBy(f => f).Select(f => latest[f]))
         {
           Console.ForegroundColor = ConsoleColor.White;
           string id = p.Identifier.PadRight(4);
           Console.Write(id);
           Console.ForegroundColor = ConsoleColor.Gray;
-          Console.WriteLine($"  {p.Time:T}  Batt:{p.Battery}/4  Comm:{p.Comm}/5  GPS:{p.Gps}/3  ID:{p.CollarId / 256}-{p.CollarId % 256}".PadRight(width - id.Length));
+          WriteLine($"  {p.Time:T}  Batt:{p.Battery}/4  Comm:{p.Comm}/5  GPS:{p.Gps}/3  ID:{p.CollarId / 256}-{p.CollarId % 256}".PadRight(width - id.Length));
           Console.ForegroundColor = ConsoleColor.Green;
-          Console.WriteLine($"           {p.Position.Latitude:0.000000}, {p.Position.Longitude:0.000000}     {p.DogStatus}".PadRight(width));
-          Console.WriteLine(string.Empty.PadRight(width));
+          WriteLine($"           {p.Position.Latitude:0.000000}, {p.Position.Longitude:0.000000}     {p.DogStatus}".PadRight(width));
+          WriteLine(string.Empty);
         }
 
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine(string.Empty.PadRight(width));
+        WriteLine(string.Empty);
         for (var i = 0; i < _errors.Length; i++)
         {
           foreach (var line in _errors[(i + errorIndex) % _errors.Length].Wrap(width))
           {
-            Console.WriteLine(line.PadRight(width));
+            WriteLine(line);
           }
         }
       }

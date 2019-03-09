@@ -11,6 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "log-to-gpx", "log-to-gpx\lo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{710FEBC6-BC19-4CC4-97B2-C122B83BE528}"
 	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
 		RELEASE_NOTES.md = RELEASE_NOTES.md
 	EndProjectSection
 EndProject
