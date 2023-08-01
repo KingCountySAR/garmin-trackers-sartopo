@@ -24,6 +24,29 @@ namespace TrackerConsole
   {
     static string callsign = null;
 
+    // Static mapping of Garmin defined colors to ConsoleColor.
+    private static Dictionary<AssetColor, ConsoleColor> _colorMap = new Dictionary<AssetColor, ConsoleColor>() {
+      { AssetColor.clr_black, ConsoleColor.Black},
+      { AssetColor.clr_dark_red, ConsoleColor.DarkRed },
+      { AssetColor.clr_dark_green, ConsoleColor.DarkGreen },
+      { AssetColor.clr_dark_yellow , ConsoleColor.DarkYellow},
+      { AssetColor.clr_dark_blue, ConsoleColor.DarkBlue},
+      { AssetColor.clr_dark_magenta , ConsoleColor.DarkMagenta},
+      { AssetColor.clr_dark_cyan , ConsoleColor.DarkCyan},
+      { AssetColor.clr_light_gray , ConsoleColor.Gray},
+      { AssetColor.clr_dark_gray , ConsoleColor.DarkGray},
+      { AssetColor.clr_red , ConsoleColor.Red},
+      { AssetColor.clr_green , ConsoleColor.Green},
+      { AssetColor.clr_yellow , ConsoleColor.Yellow},
+      { AssetColor.clr_blue , ConsoleColor.Blue},
+      { AssetColor.clr_magenta , ConsoleColor.Magenta},
+      { AssetColor.clr_cyan , ConsoleColor.Cyan},
+      { AssetColor.clr_white , ConsoleColor.White},
+      { AssetColor.clr_light_blue , ConsoleColor.Cyan},
+      { AssetColor.clr_transparent , ConsoleColor.White},
+      { AssetColor.clr_default_color, ConsoleColor.White},
+    };  
+
     static void Main(string[] args)
     {
       ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
@@ -53,7 +76,7 @@ namespace TrackerConsole
     readonly HttpClient _web = new HttpClient();
     readonly string[] _errors = new string[5];
     int errorIndex = 0;
-    Dictionary<string, D1100TrackedAsset> latest = new Dictionary<string, D1100TrackedAsset>();
+    Dictionary<byte, D1100TrackedAsset> latest = new Dictionary<byte, D1100TrackedAsset>();
     object syncLock = new object();
 
     public Program(string server)
@@ -144,15 +167,25 @@ namespace TrackerConsole
       _writer.WriteLine(JsonConvert.SerializeObject(entry));
       lock (syncLock)
       {
-        if (latest.ContainsKey(entry.Identifier))
+        if (entry.StatusFlags.HasFlag(StatusFlags.AssetRemoved) && latest.ContainsKey(entry.Index))
         {
-          latest[entry.Identifier] = entry;
+          latest.Remove(entry.Index);
+          // Force console redraw since we don't support manually clearing a specific dog in the console.
+          Console.Clear();
         }
         else
         {
-          latest.Add(entry.Identifier, entry);
+          if (latest.ContainsKey(entry.Index))
+          {
+            latest[entry.Index] = entry;
+          }
+          else
+          {
+            latest.Add(entry.Index, entry);
+          }
         }
       }
+      
 #pragma warning disable 4014
       Task.Run(async () =>
       {
@@ -206,7 +239,7 @@ namespace TrackerConsole
         WriteLine(string.Empty);
         foreach (var p in latest.Keys.OrderBy(f => f).Select(f => latest[f]))
         {
-          Console.ForegroundColor = ConsoleColor.White;
+          Console.ForegroundColor = _colorMap[(AssetColor) p.Color];
           string id = p.Identifier.PadRight(4);
           Console.Write(id);
           Console.ForegroundColor = ConsoleColor.Gray;

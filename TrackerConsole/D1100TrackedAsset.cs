@@ -30,11 +30,11 @@ namespace TrackerConsole
   [Flags]
   public enum StatusFlags : uint
   {
-    LowBattery = 1 << 12,
-    GpsLost = 1 << 13,
-    CommsLost = 1 << 14,
-    MessageReceived = 1 << 15,
-    AssetRemoved = 1 << 16
+    LowBattery = 1,
+    GpsLost = 1 << 1,
+    CommsLost = 1 << 2,
+    MessageReceived = 1 << 3,
+    AssetRemoved = 1 << 4
   }
 
   public enum DogStatus
@@ -98,7 +98,7 @@ namespace TrackerConsole
       DogStatus = (DogStatus)(status & 0x0f);
       Platform = (PlatformType)((status >> 4) & 0x1f);
       TrackerType = (TrackerType)((status >> 8) & 0x07);
-      StatusFlags = (StatusFlags)((status >> 11) & 0x1f);
+      StatusFlags = (StatusFlags)(status >> 12);
       
       Symbol = (SymbolType)BitConverter.ToUInt16(buffer, offset);
       offset += 2;
@@ -115,7 +115,7 @@ namespace TrackerConsole
       Index = buffer[offset++];
 
       StringBuilder sb = new StringBuilder();
-      for (int i=0;i<37;i++)
+      for (int i=0;i<14;i++)
       {
         if (buffer[offset + i] == 0) break;
         sb.Append((char)buffer[offset + i]);
@@ -134,7 +134,32 @@ namespace TrackerConsole
     }
   }
 
-  public enum SymbolType : ushort
+  /// <summary>
+  /// Garmin Defined Colors
+  /// </summary>
+  public enum AssetColor : uint
+  {
+    clr_black = 0,
+    clr_dark_red = 1,
+    clr_dark_green = 2,
+    clr_dark_yellow = 3,
+    clr_dark_blue = 4,
+    clr_dark_magenta = 5,
+    clr_dark_cyan = 6,
+    clr_light_gray = 7,
+    clr_dark_gray = 8,
+    clr_red = 9,
+    clr_green = 10,
+    clr_yellow = 11,
+    clr_blue = 12,
+    clr_magenta = 13,
+    clr_cyan = 14,
+    clr_white = 15,
+    clr_light_blue = 16,
+    clr_transparent = 17,
+    clr_default_color = 255
+  };
+public enum SymbolType : ushort
   {
     /*---------------------------------------------------------------
     Marine symbols
