@@ -23,6 +23,7 @@ namespace TrackerConsole
   class Program
   {
     static string callsign = null;
+    const string DefaultIdentifier = "Dog";
 
     // Static mapping of Garmin defined colors to ConsoleColor.
     private static Dictionary<AssetColor, ConsoleColor> _colorMap = new Dictionary<AssetColor, ConsoleColor>() {
@@ -192,18 +193,22 @@ namespace TrackerConsole
         try
         {
           string identifier = entry.Identifier;
-          if (!string.IsNullOrWhiteSpace(callsign)) identifier = callsign + "-" + identifier;
+          // Don't push a server update if a collar was just added to the BaseStation device.
+          if (!string.IsNullOrEmpty(identifier) && !string.Equals(identifier, DefaultIdentifier, StringComparison.InvariantCultureIgnoreCase))
+          {
+            if (!string.IsNullOrWhiteSpace(callsign)) identifier = callsign + "-" + identifier;
 
-          await _web.GetAsync($"{_server}/rest/location/update/position?lat={entry.Position.Latitude}&lng={entry.Position.Longitude}&id=FLEET:{identifier}");
+              await _web.GetAsync($"{_server}/rest/location/update/position?lat={entry.Position.Latitude}&lng={entry.Position.Longitude}&id=FLEET:{identifier}");
+          }
         }
         catch (HttpRequestException ex)
 
         {
-          LogException(ex.InnerException.Message);
+            LogException(ex.InnerException.Message);
         }
         catch (Exception ex)
         {
-          LogException(ex.Message);
+            LogException(ex.Message);
         }
       }).ConfigureAwait(false);
 #pragma warning restore 4014
