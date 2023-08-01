@@ -165,7 +165,6 @@ namespace TrackerConsole
       }
 
       _writer.WriteLine(JsonConvert.SerializeObject(entry));
-
       lock (syncLock)
       {
         if (entry.StatusFlags.HasFlag(StatusFlags.AssetRemoved) && latest.ContainsKey(entry.Index))
@@ -208,7 +207,7 @@ namespace TrackerConsole
         }
       }).ConfigureAwait(false);
 #pragma warning restore 4014
-      
+
       Print();
     }
 
