@@ -134,28 +134,31 @@ namespace TrackerConsole
     }
   }
 
-public enum AssetColor : uint
-{
-clr_black = 0,
-clr_dark_red = 1,
-clr_dark_green = 2,
-clr_dark_yellow = 3,
-clr_dark_blue = 4,
-clr_dark_magenta = 5,
-clr_dark_cyan = 6,
-clr_light_gray = 7,
-clr_dark_gray = 8,
-clr_red = 9,
-clr_green = 10,
-clr_yellow = 11,
-clr_blue = 12,
-clr_magenta = 13,
-clr_cyan = 14,
-clr_white = 15,
-clr_light_blue = 16,
-clr_transparent = 17,
-clr_default_color = 255
-};
+  /// <summary>
+  /// Garmin Defined Colors
+  /// </summary>
+  public enum AssetColor : uint
+  {
+    clr_black = 0,
+    clr_dark_red = 1,
+    clr_dark_green = 2,
+    clr_dark_yellow = 3,
+    clr_dark_blue = 4,
+    clr_dark_magenta = 5,
+    clr_dark_cyan = 6,
+    clr_light_gray = 7,
+    clr_dark_gray = 8,
+    clr_red = 9,
+    clr_green = 10,
+    clr_yellow = 11,
+    clr_blue = 12,
+    clr_magenta = 13,
+    clr_cyan = 14,
+    clr_white = 15,
+    clr_light_blue = 16,
+    clr_transparent = 17,
+    clr_default_color = 255
+  };
 public enum SymbolType : ushort
   {
     /*---------------------------------------------------------------

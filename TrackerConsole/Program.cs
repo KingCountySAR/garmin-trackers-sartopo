@@ -23,27 +23,30 @@ namespace TrackerConsole
   class Program
   {
     static string callsign = null;
-        private static Dictionary<AssetColor, ConsoleColor> _colorMap = new Dictionary<AssetColor, ConsoleColor>() {
-            { AssetColor.clr_black, ConsoleColor.Black},
-            { AssetColor.clr_dark_red, ConsoleColor.DarkRed },
-            { AssetColor.clr_dark_green, ConsoleColor.DarkGreen },
-            { AssetColor.clr_dark_yellow , ConsoleColor.DarkYellow},
-            { AssetColor.clr_dark_blue, ConsoleColor.DarkBlue},
-            { AssetColor.clr_dark_magenta , ConsoleColor.DarkMagenta},
-            { AssetColor.clr_dark_cyan , ConsoleColor.DarkCyan},
-            { AssetColor.clr_light_gray , ConsoleColor.Gray},
-            { AssetColor.clr_dark_gray , ConsoleColor.DarkGray},
-            { AssetColor.clr_red , ConsoleColor.Red},
-            { AssetColor.clr_green , ConsoleColor.Green},
-            { AssetColor.clr_yellow , ConsoleColor.Yellow},
-            { AssetColor.clr_blue , ConsoleColor.Blue},
-            { AssetColor.clr_magenta , ConsoleColor.Magenta},
-            { AssetColor.clr_cyan , ConsoleColor.Cyan},
-            { AssetColor.clr_white , ConsoleColor.White},
-            { AssetColor.clr_light_blue , ConsoleColor.Cyan},
-            { AssetColor.clr_transparent , ConsoleColor.White},
-            { AssetColor.clr_default_color, ConsoleColor.White},
-        };  
+
+    // Static mapping of Garmin defined colors to ConsoleColor.
+    private static Dictionary<AssetColor, ConsoleColor> _colorMap = new Dictionary<AssetColor, ConsoleColor>() {
+      { AssetColor.clr_black, ConsoleColor.Black},
+      { AssetColor.clr_dark_red, ConsoleColor.DarkRed },
+      { AssetColor.clr_dark_green, ConsoleColor.DarkGreen },
+      { AssetColor.clr_dark_yellow , ConsoleColor.DarkYellow},
+      { AssetColor.clr_dark_blue, ConsoleColor.DarkBlue},
+      { AssetColor.clr_dark_magenta , ConsoleColor.DarkMagenta},
+      { AssetColor.clr_dark_cyan , ConsoleColor.DarkCyan},
+      { AssetColor.clr_light_gray , ConsoleColor.Gray},
+      { AssetColor.clr_dark_gray , ConsoleColor.DarkGray},
+      { AssetColor.clr_red , ConsoleColor.Red},
+      { AssetColor.clr_green , ConsoleColor.Green},
+      { AssetColor.clr_yellow , ConsoleColor.Yellow},
+      { AssetColor.clr_blue , ConsoleColor.Blue},
+      { AssetColor.clr_magenta , ConsoleColor.Magenta},
+      { AssetColor.clr_cyan , ConsoleColor.Cyan},
+      { AssetColor.clr_white , ConsoleColor.White},
+      { AssetColor.clr_light_blue , ConsoleColor.Cyan},
+      { AssetColor.clr_transparent , ConsoleColor.White},
+      { AssetColor.clr_default_color, ConsoleColor.White},
+    };  
+
     static void Main(string[] args)
     {
       ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
@@ -165,24 +168,23 @@ namespace TrackerConsole
 
       lock (syncLock)
       {
-                if (entry.StatusFlags.HasFlag(StatusFlags.AssetRemoved) && latest.ContainsKey(entry.Index))
-                {
-                    latest.Remove(entry.Index);
-                    Console.Clear();
-                }
-                else
-                {
-
-                    if (latest.ContainsKey(entry.Index))
-                    {
-
-                        latest[entry.Index] = entry;
-                    }
-                    else
-                    {
-                        latest.Add(entry.Index, entry);
-                    }
-                }
+        if (entry.StatusFlags.HasFlag(StatusFlags.AssetRemoved) && latest.ContainsKey(entry.Index))
+        {
+          latest.Remove(entry.Index);
+          // Force console redraw since we don't support manually clearing a specific dog in the console.
+          Console.Clear();
+        }
+        else
+        {
+          if (latest.ContainsKey(entry.Index))
+          {
+            latest[entry.Index] = entry;
+          }
+          else
+          {
+            latest.Add(entry.Index, entry);
+          }
+        }
       }
       
 #pragma warning disable 4014
